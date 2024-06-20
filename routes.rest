@@ -1,0 +1,163 @@
+# ***USERS***
+
+# *signup
+POST http://localhost:3000/api/users/signup
+Content-Type: application/json
+
+{
+	"name": "Damien",
+	"username": "blurrr",
+	"email": "blur@example.com",
+	"bio":"wohoo!",
+	"hobbies": "music",
+	"password1": "songnotwo",
+	"password2": "songnotwo"
+}
+
+###
+
+# *login
+POST http://localhost:3000/api/users/login
+Content-Type: application/json
+
+{
+	"username": "blurrr",
+	"password": "songnotwo"
+}
+
+###
+
+# *profilepage
+GET http://localhost:3000/profile
+
+###
+
+# *get all users(for info-not in use)
+GET http://localhost:3000/api/users
+
+###
+
+# *logout
+POST http://localhost:3000/api/users/logout
+
+###
+
+# todo * update user
+PUT http://localhost:3000/api/users/update/11
+Content-Type: application/json
+
+{
+	"bio" : "I got my head checked By a jumbo jet It wasn't easy But nothing is No",
+}
+###
+
+# friends list
+GET http://localhost:3000/api/users/friends
+
+###
+
+# add friend
+POST http://localhost:3000/api/users/addfriend/7
+Content-Type: application/json
+
+{
+	"userId":  9
+}
+
+###
+
+# remove friend
+POST http://localhost:3000/api/users/removeFriend/1
+Content-Type: application/json
+
+{
+	"user_id": 9
+}
+
+###
+
+
+#***SEARCHING***
+# *search by user
+GET http://localhost:3000/search?search=alice
+
+###
+
+# *search by event
+GET http://localhost:3000/search?search=home
+
+###
+
+
+#***EVENTS***
+
+# *get all events-homepage
+GET http://localhost:3000
+
+###
+
+# *join event
+POST http://localhost:3000/api/users/join/7
+Content-Type: application/json
+
+{
+	"user_id": 8
+}
+
+###
+
+# *leave event
+POST http://localhost:3000/api/users/leave/1
+Content-Type: application/json
+
+{
+	"user_id": 11
+}
+
+###
+
+# *create event
+POST http://localhost:3000/api/events/createEvent
+Content-Type: application/json
+
+	{
+        "title": "Music Fest",
+        "date": "2024-09-05T09:00:00Z",
+        "description": "Let's boogie.",
+        "category": "Music"
+    }
+
+###
+
+# *delete event
+DELETE  http://localhost:3000/api/events/delete/2
+
+###
+
+# *event by event id
+GET  http://localhost:3000/api/events/1
+
+###
+
+# *update event
+PUT  http://localhost:3000/api/events/update/8
+Content-Type: application/json
+
+{
+	"title": "Study Group",
+	"date": "2024-06-14T09:00:00Z",
+	"description": "Group project study session.",
+	"category": "Learning"
+}
+
+###
+
+#! login user particpating
+GET http://localhost:3000/api/users/upcoming
+
+###
+#! login user created
+GET http://localhost:3000/api/events/created
+
+###
+
