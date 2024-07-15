@@ -14,16 +14,38 @@ module.exports = sequelize.define(
       type: DataTypes.INTEGER,
     },
     email: {
-      allowNull: false,
       type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: "email cannot be null",
+        },
+        notEmpty: {
+          msg: "email cannot be empty",
+        },
+        isEmail: {
+          msg: "Invalid email id",
+        },
+      },
     },
     password: {
       allowNull: false,
       type: DataTypes.STRING,
+      validate: {
+        notNull: {
+          msg: "password cannot be null",
+        },
+        notEmpty: {
+          msg: "password cannot be empty",
+        },
+      },
     },
     confirmPassword: {
       type: DataTypes.VIRTUAL,
       set(value) {
+        if (this.password.length < 7) {
+          throw new AppError("Password length must be grater than 7", 400);
+        }
         if (value === this.password) {
           const hashPassword = bcrypt.hashSync(value, 10);
           this.setDataValue("password", hashPassword);
