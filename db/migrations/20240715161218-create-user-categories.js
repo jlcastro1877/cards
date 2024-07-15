@@ -11,6 +11,11 @@ module.exports = {
       },
       id_user: {
         type: Sequelize.INTEGER,
+        allowNull: true,
+        references: {
+          model: "user",
+          key: "id",
+        },
       },
       id_categorie: {
         type: Sequelize.INTEGER,

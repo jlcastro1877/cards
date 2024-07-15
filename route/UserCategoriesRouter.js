@@ -1,9 +1,14 @@
+const { authentication } = require("../controller/authController");
 const {
-  createuUerCategories,
+  createUserCategories,
+  getAllUserCategories,
 } = require("../controller/userCategoriesController");
 
 const router = require("express").Router();
 
-router.route("/").post(createuUerCategories);
+router
+  .route("/")
+  .post(authentication, createUserCategories)
+  .get(authentication, getAllUserCategories);
 
 module.exports = router;
