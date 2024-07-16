@@ -1,0 +1,18 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.card {
+  padding: 15px;
+  text-align: center;
+  border-radius: 0%;
+  border-bottom-style: solid;
+  border-bottom-color: #1c87c9;
+  border-bottom-width: 5px;
+}
+
+.card:hover {
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
