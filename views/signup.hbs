@@ -1,0 +1,56 @@
+{{! views/signup.hbs }}
+<h1 class="mt-5">Signup</h1>
+<form id="signupForm" action="/api/auth/signup" method="post">
+  <div class="mb-3">
+    <label for="email" class="form-label">Email address</label>
+    <input type="email" class="form-control" id="email" name="email" required />
+    <div id="emailHelp" class="form-text">We'll never share your email with
+      anyone else.</div>
+  </div>
+  <div class="mb-3">
+    <label for="password" class="form-label">Password</label>
+    <input
+      type="password"
+      class="form-control"
+      id="password"
+      name="password"
+      required
+    />
+  </div>
+  <div class="mb-3">
+    <label for="confirmPassword" class="form-label">Confirm Password</label>
+    <input
+      type="password"
+      class="form-control"
+      id="confirmPassword"
+      name="confirmPassword"
+      required
+    />
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+  <div id="responseMessage" class="mt-3"></div>
+</form>
+
+<script>
+  document.getElementById('signupForm').addEventListener('submit', async
+  function (event) { event.preventDefault(); // Prevent the default form
+  submission // Get form values const email =
+  document.getElementById('email').value; const password =
+  document.getElementById('password').value; const confirmPassword =
+  document.getElementById('confirmPassword').value; // Check if passwords match
+  if (password !== confirmPassword) {
+  document.getElementById('responseMessage').innerText = 'Passwords do not
+  match!'; document.getElementById('responseMessage').className = 'text-danger';
+  return; } // Send data to the server try { const response = await
+  fetch('/api/auth/signup', { method: 'POST', headers: { 'Content-Type':
+  'application/json', }, body: JSON.stringify({ email, password }), }); const
+  result = await response.json(); if (response.ok) {
+  document.getElementById('responseMessage').innerText = 'Signup successful!';
+  document.getElementById('responseMessage').className = 'text-success'; } else
+  { document.getElementById('responseMessage').innerText = result.message ||
+  'Signup failed'; document.getElementById('responseMessage').className =
+  'text-danger'; } } catch (error) { console.error('Error:', error);
+  document.getElementById('responseMessage').innerText = 'An error occurred.
+  Please try again.'; document.getElementById('responseMessage').className =
+  'text-danger'; } });
+</script>
