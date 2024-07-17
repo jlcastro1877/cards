@@ -68,6 +68,38 @@ app.post("/api/auth/login", async (req, res) => {
   }
 });
 
+// Route to handle user registration
+app.post("/api/auth/signup", async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    // Check if the email already exists
+    const existingUserResult = await pool.query(
+      "SELECT * FROM users WHERE email = $1",
+      [email]
+    );
+
+    if (existingUserResult.rows.length > 0) {
+      return res.status(400).json({ message: "Email already registered" });
+    }
+
+    // Hash the password
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Insert the new user into the database
+    await pool.query("INSERT INTO users (email, password) VALUES ($1, $2)", [
+      email,
+      hashedPassword,
+    ]);
+
+    // Successful signup
+    res.status(201).json({ message: "Signup successful. You can now login." });
+  } catch (error) {
+    console.error("Signup error:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
 // Route to serve the categories page
 app.get("/categories", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "categories.html")); // Serve categories.html from public directory
@@ -116,6 +148,11 @@ app.get("/api/favorites", async (req, res) => {
     console.error("Error fetching favorites:", error);
     res.status(500).json({ message: "Server error" });
   }
+});
+
+// Route to handle logout
+app.post("/api/auth/logout", (req, res) => {
+  res.status(200).json({ message: "Logout successful", redirectUrl: "/" });
 });
 
 // Start the server
