@@ -47,6 +47,12 @@
 ![image](https://github.com/user-attachments/assets/a9c7a9ca-467a-4096-82e0-a234ca6a14f1)
 ![image](https://github.com/user-attachments/assets/c5d2062b-e90c-4932-9d21-7e28806d90a3)
 
+## The database
+![image](https://github.com/user-attachments/assets/3eee91da-fdd2-444b-85f4-409410adefd2)
+![image](https://github.com/user-attachments/assets/f57a0ad9-bbdf-4c71-9c85-aa8ed361e07c)
+
+
+
 
 
 
